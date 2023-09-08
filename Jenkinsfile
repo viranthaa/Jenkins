@@ -3,46 +3,46 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Use Maven"
+                echo "Utilize Maven as a build automation and project management tool."
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo "Use NPM Test"
+                echo "Utilize the NPM Test command."
             }
         }
         stage('Code Analysis') {
             steps {
-                echo "Try Sonar-Scanner"
+                echo "Please consider giving Sonar-Scanner a try."
             }
         }
         stage('Security Scan') {
             steps {
-                echo "Use a security scanning tool to identify vulnerabilities"
-                echo "Trying npm audit"
+                echo "Utilize a security scanning tool to detect potential security weaknesses."
+                echo "Performing a test with the npm audit command."
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo "Use AWS CLI or other deployment tool to deploy to staging"
+                echo "Utilize the AWS CLI or an alternative deployment tool for staging deployment."
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Running"
+                echo "Executing"
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Use AWS CLI or other deployment tool to deploy to production"
+                echo "Utilize the AWS CLI or an alternative deployment tool for deploying to the production environment."
             }
         }
     }
     post {
         success {
                 mail to:"viranthamudalige@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful."
+                subject: "Build Completed Successfully: ${currentBuild.fullDisplayName}",
+                body: "The build has been completed without any issues."
                 }
 
       
