@@ -1,6 +1,5 @@
 pipeline {
-        agent any
-    
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -11,24 +10,7 @@ pipeline {
             steps {
                 echo "Utilize the NPM Test command."
             }
-            post {
-                failure {
-                    emailext(
-                        to:"viranthamudalige@gmail.com",
-                        subject: "Unit and Integration Tests Failed: ${currentBuild.fullDisplayName}",
-                        body: "Unit and Integration Tests failed. Please try again. Check the attached log for more information."
-                       
-                    )
-               }
-                success {
-                    emailext(
-                        to:"viranthamudalige@gmail.com",
-                        subject: "Unit and Integration Tests Completed Successfully: ${currentBuild.fullDisplayName}",
-                        body: "Unit and Integration Tests have been completed without any issues. Check the attached log for more information."
-                      
-                    )
-                }
-            }
+            
         }
         stage('Code Analysis') {
             steps {
@@ -40,23 +22,6 @@ pipeline {
                 echo "Utilize a security scanning tool to detect potential security weaknesses."
                 echo "Performing a test with the npm audit command."
             }
-            post {
-                failure {
-                    emailext(
-                        to:"viranthamudalige@gmail.com",
-                        subject: "Security Scan Failed: ${currentBuild.fullDisplayName}",
-                        body: "Security Scan failed. Please try again. Check the attached log for more information."
-                       
-                    )
-               }
-               success {
-                    emailext(
-                        to:"viranthamudalige@gmail.com",
-                        subject: "Security Scan Completed Successfully: ${currentBuild.fullDisplayName}",
-                        body: "Security Scan has been completed without any issues. Check the attached log for more information."
-                        
-                    )
-                }
         }
         stage('Deploy to Staging') {
             steps {
@@ -78,8 +43,8 @@ pipeline {
         success {
                 mail to:"viranthamudalige@gmail.com",
                 subject: "Build Completed Successfully: ${currentBuild.fullDisplayName}",
-                body: "The build has been completed without any issues."
-                }    
+                body: "The build has been completed without any issues.",
+                attachLog: true
+                }
         }
-    }
 }
