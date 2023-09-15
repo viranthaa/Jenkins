@@ -3,47 +3,48 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Utilize Maven as a build automation and project management tool."
+                echo "Use Maven"
             }
         }
         stage('Unit and Integration Tests') {
             steps {
-                echo "Utilize the NPM Test command."
+                echo "Use NPM Test"
             }
-            
         }
         stage('Code Analysis') {
             steps {
-                echo "Please consider giving Sonar-Scanner a try."
+                echo "Try Sonar-Scanner"
             }
         }
         stage('Security Scan') {
             steps {
-                echo "Utilize a security scanning tool to detect potential security weaknesses."
-                echo "Performing a test with the npm audit command."
+                echo "Use a security scanning tool to identify vulnerabilities"
+                echo "Trying npm audit"
             }
         }
         stage('Deploy to Staging') {
             steps {
-                echo "Utilize the AWS CLI or an alternative deployment tool for staging deployment."
+                echo "Use AWS CLI or other deployment tool to deploy to staging"
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo "Executing"
+                echo "Running"
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Utilize the AWS CLI or an alternative deployment tool for deploying to the production environment."
+                echo "Use AWS CLI or other deployment tool to deploy to production"
             }
         }
-    }
     post {
-            success {
+        success {
                 mail to:"viranthamudalige@gmail.com",
                 subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful. \n Integration Tests on Staging: ${attachLog: true}"
-            }
-}
+                body: "The build was successful. \n ${attachLog: true}"
+                attachLog: true
+                }
+                echo "Successful email sent."
+        }
+    }
 }
