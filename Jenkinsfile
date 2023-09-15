@@ -43,8 +43,7 @@ pipeline {
         success {
                 mail to:"viranthamudalige@gmail.com",
                 subject: "Build Completed Successfully: ${currentBuild.fullDisplayName}",
-                body: "The build has been completed without any issues.",
-                attachLog: true
+                body: "The build has been completed without any issues."
                 }
         }
 }
