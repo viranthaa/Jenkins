@@ -31,20 +31,21 @@ pipeline {
             steps {
                 echo "Running"
             }
+             post {
+                    success {
+                            mail to:"viranthamudalige@gmail.com",
+                            subject: "Build Successful: ${currentBuild.fullDisplayName}",
+                            body: "The build was successful. \n ${attachLog: true}"
+                            attachLog: true
+                            }
+                            echo "Successful email sent."
+        }
         }
         stage('Deploy to Production') {
             steps {
                 echo "Use AWS CLI or other deployment tool to deploy to production"
             }
         }
-    post {
-        success {
-                mail to:"viranthamudalige@gmail.com",
-                subject: "Build Successful: ${currentBuild.fullDisplayName}",
-                body: "The build was successful. \n ${attachLog: true}"
-                attachLog: true
-                }
-                echo "Successful email sent."
-        }
+   
     }
 }
