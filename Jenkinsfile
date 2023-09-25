@@ -1,94 +1,52 @@
-pipeline{
+pipeline {
     agent any
-   
-    stages{
-        stage('Build'){
-            steps{
-    
-                echo "Bulding Initiated using Maven"
-                echo "Build succesfully"
+    stages {
+        stage('Build') {
+            steps {
+                echo "Utilize Maven as a build automation and project management tool."
             }
         }
-
-        stage('Unit and Integration Tests'){
-            steps{
-                echo "Unit tests Initiated with NUint"
-                echo "Unit tests completed."
-                echo "Intergration tests started with Selenium"
-                echo "Intergration tests completed."
+        stage('Unit and Integration Tests') {
+            steps {
+                echo "Utilize the NPM Test command."
             }
-            post {
-                failure {
-                    emailext(
-                        to: 'viranthamudalige@gmail.com',
-                        subject: "Unit and Integration Test Failed",
-                        body: 'Unit and Integration Test failed. Please check attached logs for more details.',
-                        attachLog: true 
-                    )      
-                }
-                success {
-                    emailext(
-                        to: 'viranthamudalige@gmail.com',
-                        subject: 'Unit and Integration Test Succeeded',
-                        body: 'Unit and Integration Test succeeded.Please Check attached logs for more details.',
-                        attachLog: true     
-                    ) 
-                }
-            }
-
+            
         }
-
-        stage('Code Analysis'){
-            steps{
-                echo "Code analysis started with Veracode"
-                echo "Code analysis succesfully completed"
+        stage('Code Analysis') {
+            steps {
+                echo "Please consider giving Sonar-Scanner a try."
             }
         }
-
-        stage('Security Scan'){
-            steps{
-                echo "Security scans started with 42Crunch"
-                echo "Security scans succesfully completed"
-            }
-            post {
-                failure {
-                    emailext(
-                        to: 'viranthamudalige@gmail.com',
-                        subject: 'Security Scan Failed',
-                        body: 'Security Scan failed.Please Check attached logs for more details.',
-                        attachLog: true  
-                    ) 
-                }
-                success {
-                    emailext(
-                        to: 'viranthamudalige@gmail.com',
-                        subject: 'Security Scan Succeeded',
-                        body: 'Security Scan succeeded.Please check attached logs for details.',
-                        attachLog: true 
-                    )   
-                }
+        stage('Security Scan') {
+            steps {
+                echo "Utilize a security scanning tool to detect potential security weaknesses."
+                echo "Performing a test with the npm audit command."
             }
         }
-
-        stage('Deploy to Staging'){
-            steps{
-                echo "Stagging deployment started"
-                echo "Deployed to AWS EC2 instance-id: i-4214535890abcdef0 staging server"
+        stage('Deploy to Staging') {
+            steps {
+                echo "Utilize the AWS CLI or an alternative deployment tool for staging deployment."
             }
         }
-
-        stage('Integration Tests on Staging'){
-            steps{
-                echo "Intergration tests started with Selenium"
-                echo "Intergration tests completed succesfully."
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Executing"
             }
         }
-
         stage('Deploy to Production') {
             steps {
-                echo "Stagging deployment started"
-                echo "Deployed to AWS EC2 instance-i-4214535890abcdef0 staging server"
+                echo "Utilize the AWS CLI or an alternative deployment tool for deploying to the production environment."
             }
         }
+    }
+    post {
+        success {
+            emailext(
+                to: 'viranthamudalige@gmail.com',
+                subject: 'Build Completed Successfully',
+                body: 'The build has been completed without any issues.'
+                )
+
+                }
     }
 }
