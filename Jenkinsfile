@@ -4,7 +4,7 @@ pipeline{
     stages{
         stage('Build'){
             steps{
-                echo "Code fetched from https://github.com/477Hashini/JenkinsIntegration.git/"
+    
                 echo "Bulding Initiated using Maven"
                 echo "Build succesfully"
             }
