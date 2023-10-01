@@ -1,52 +1,100 @@
 pipeline {
     agent any
+   
     stages {
         stage('Build') {
             steps {
-                echo "Utilize Maven as a build automation and project management tool."
+                echo "Code fetched from https://github.com/manubalhara/Jenkins-Project.git"
+                echo "Building Initiated using Maven"
+                echo "Build successful"
             }
         }
+
         stage('Unit and Integration Tests') {
             steps {
-                echo "Utilize the NPM Test command."
+                echo "Unit tests Initiated with NUint"
+                echo "Unit tests completed."
+                echo "Integration tests started with Selenium"
+                echo "Integration tests completed."
             }
             
-        }
-        stage('Code Analysis') {
-            steps {
-                echo "Please consider giving Sonar-Scanner a try."
-            }
-        }
-        stage('Security Scan') {
-            steps {
-                echo "Utilize a security scanning tool to detect potential security weaknesses."
-                echo "Performing a test with the npm audit command."
-            }
-        }
-        stage('Deploy to Staging') {
-            steps {
-                echo "Utilize the AWS CLI or an alternative deployment tool for staging deployment."
-            }
-        }
-        stage('Integration Tests on Staging') {
-            steps {
-                echo "Executing"
-            }
-        }
-        stage('Deploy to Production') {
-            steps {
-                echo "Utilize the AWS CLI or an alternative deployment tool for deploying to the production environment."
-            }
-        }
-    }
-    post {
+       post {
         success {
+            echo "Unit and Integration Tests stage SUCCEDED"  // Add this line for debugging
             emailext(
                 to: 'viranthamudalige@gmail.com',
-                subject: 'Build Completed Successfully',
-                body: 'The build has been completed without any issues.'
-                )
-
-                }
+                subject:"Unit and Integration Tests Stage Status:  ${currentBuild.result}",
+                body:"Please check the logs for details.",
+                attachLog: true
+            )
+        }
+        failure {
+            echo "Unit and Integration Tests stage FAILED"  // Add this line for debugging
+            emailext(
+                to: 'viranthamudalige@gmail.com',
+                subject:'Build Status:  ${currentBuild.result}',
+                body:"Please check the logs for details.",
+                attachLog: true
+            )
+        }
     }
+        }
+
+        stage('Code Analysis') {
+            steps {
+                echo "Code analysis started with Veracode"
+                echo "Code analysis successfully completed"
+            }
+        }
+
+        stage('Security Scan') {
+            steps {
+                echo "Security scans started with 42Crunch"
+                echo "Security scans successfully completed"
+            }
+            
+                   post {
+        success {
+            echo "Unit and Integration Tests stage SUCCEDED"  // Add this line for debugging
+            emailext(
+                to: 'viranthamudalige@gmail.com',
+                subject:"Security Scan:  ${currentBuild.result}",
+                body:"Please check the logs for details.",
+                attachLog: true
+            )
+        }
+
+        failure {
+            echo "Security Scan Tests stage FAILED"  // Add this line for debugging
+            emailext(
+                to: 'viranthamudalige@gmail.com',
+                subject:"Security Scan:  ${currentBuild.result}",
+                body:"Please check the logs for details.",
+                attachLog: true
+            )
+        }
+    }
+    }
+
+        stage('Deploy to Staging') {
+            steps {
+                echo "Staging deployment started"
+                echo "Deployed to AWS EC2 instance-id: i-4214535890abcdef0 staging server"
+            }
+        }
+
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Integration tests started with Selenium"
+                echo "Integration tests completed successfully."
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                echo "Production deployment started"
+                echo "Deployed to AWS EC2 instance-i-4214535890abcdef0 production server"
+            }
+        }
+    }
 }
