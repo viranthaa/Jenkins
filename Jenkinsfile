@@ -14,10 +14,10 @@ pipeline {
             steps {
                 echo "Initiation of the Unit Testing Process utilizing TestNG."
                 echo "Executing"
-                echo "The Unit Testing Process has been successfully concluded."
+                
                 echo "Initiation of the Integration Testing Process utilizing JMeter."
                 echo "Executing"
-                echo "The Integration Testing Process has been successfully concluded."
+                
             }
             
        post {
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 echo "Initiation of the Security Scanning Process utilizing Checkmarx."
                 echo "Executing"
-                echo "The Security Scanning Process has been successfully concluded."
+                
             }
             
                    post {
